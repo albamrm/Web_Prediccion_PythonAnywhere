@@ -1,10 +1,9 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 import os
 import pickle
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-
 
 # Cambiar al directorio del script
 # os.chdir(os.path.dirname(__file__))
@@ -23,7 +22,7 @@ scaler = StandardScaler()
 # Endpoint para la landing page
 @app.route('/')
 def home():
-    return "Welcome to the Penguin Prediction API!"
+    return render_template('index.html')
 
 # Endpoint para realizar predicciones
 @app.route('/api/v1/predict', methods=['POST'])
