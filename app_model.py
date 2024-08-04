@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 
 # Cargar el modelo y el scaler
-model_path = '/mnt/data/ad_model.pkl'
+model_path = 'home/Juanxetee/sabadosteam/'
 with open(model_path, 'rb') as f:
     model = pickle.load(f)
 
