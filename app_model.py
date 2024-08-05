@@ -61,7 +61,7 @@ def predict():
         except Exception as e:
             return jsonify({'error': str(e)}), 500
     else:
-        return send_from_directory(template_dir, '/predict.html')
+        return send_from_directory(template_dir, 'predict.html')
 
 # Endpoint para reentrenar el modelo
 @app.route('/api/v1/retrain', methods=['GET'])
@@ -94,7 +94,7 @@ def retrain():
         except Exception as e:
             return jsonify({'error': str(e)}), 500
     else:
-        return send_from_directory(template_dir, '/retrain.html')
+        return send_from_directory(template_dir, 'retrain.html')
 
 @app.route('/webhook_2024', methods=['POST'])
 def webhook():
