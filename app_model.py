@@ -5,9 +5,6 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
-# Cambiar al directorio del script
-# os.chdir(os.path.dirname(__file__))
-
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
