@@ -22,23 +22,38 @@ def hello():
 # Enruta la funcion al endpoint /api/v1/predict
 
 @app.route('/api/v1/predict', methods=['GET'])
-def predict(): # Ligado al endpoint '/api/v1/predict', con el método GET
+def predict():
+    try:
+        # Obtener los parámetros de la solicitud GET
+        long1 = request.args.get('l1', None)
+        long2 = request.args.get('l2', None)
+        long3 = request.args.get('l3', None)
+        genero = request.args.get('genero', None)
 
-    model = pickle.load(open(path_base + 'ad_model.pkl','rb'))
-    long1 = request.args.get('l1', None)
-    long2 = request.args.get('l2', None)
-    long3 = request.args.get('l3', None)
-    genero = request.args.get('genero', None)
+        # Verificar que todos los parámetros estén presentes
+        if long1 is None or long2 is None or long3 is None or genero is None:
+            return "Args empty, the data are not enough to predict", 400
 
-    print(long1,long2, long3, genero)
-    print(type(genero))
+        # Convertir los parámetros a sus tipos adecuados
+        long1 = float(long1)
+        long2 = float(long2)
+        long3 = float(long3)
+        genero = int(genero)
 
-    if long1 is None or long2 is None or long3 is None or genero is None:
-        return "Args empty, the data are not enough to predict, STUPID!!!!"
-    else:
-        prediction = model.predict([[float(long1),float(long2),float(long3),str(genero)]])
-    
-    return jsonify({'predictions': prediction[0]})
+        # Crear un DataFrame con los datos de entrada
+        input_data = pd.DataFrame([[long1, long2, long3, genero]], 
+                                  columns=['l1', 'l2', 'l3', 'genero'])
+
+        # Escalar los datos de entrada
+        input_scaled = scaler.transform(input_data)
+
+        # Realizar la predicción
+        prediction = model.predict(input_scaled)
+        
+        # Retornar la predicción en formato JSON
+        return jsonify({'predictions': prediction[0]})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 # Endpoint para reentrenar el modelo
 @app.route('/api/v1/retrain', methods=['GET'])
