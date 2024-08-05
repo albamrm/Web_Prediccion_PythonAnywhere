@@ -9,7 +9,7 @@ import subprocess
 
 # os.chdir(os.path.dirname(__file__))
 
-path_base = "/home/Juanxetee/sabadosteam"
+path_base = "/home/findecurso/sabadosteam"
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
