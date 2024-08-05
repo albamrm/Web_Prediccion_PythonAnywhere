@@ -25,7 +25,7 @@ def hello():
 def predict():
     try:
         # Cargar el modelo
-        model_path = os.path.join(path_base +'/ad_model.pkl','rb')
+        model_path = os.path.join(path_base + 'ad_model.pkl','rb')
         with open(model_path, 'rb') as f:
             model = pickle.load(f)
         
