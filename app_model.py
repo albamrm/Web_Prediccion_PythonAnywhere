@@ -30,30 +30,31 @@ def predict():
             model = pickle.load(f)
         
         # Obtener los parámetros de la solicitud GET
-        long1 = request.args.get('l1', None)
-        long2 = request.args.get('l2', None)
-        long3 = request.args.get('l3', None)
-        genero = request.args.get('genero', None)
+        bill_length_mm = request.args.get('bill_length_mm', None)
+        bill_depth_mm = request.args.get('bill_depth_mm', None)
+        flipper_length_mm = request.args.get('flipper_length_mm', None)
+        body_mass_g = request.args.get('body_mass_g', None)
+        sex = request.args.get('sex', None)
+        island = request.args.get('island', None)
 
         # Verificar que todos los parámetros estén presentes
-        if long1 is None or long2 is None or long3 is None or genero is None:
+        if (bill_length_mm is None or bill_depth_mm is None or flipper_length_mm is None or 
+                body_mass_g is None or sex is None or island is None):
             return "Args empty, the data are not enough to predict", 400
 
         # Convertir los parámetros a sus tipos adecuados
-        long1 = float(long1)
-        long2 = float(long2)
-        long3 = float(long3)
-        genero = int(genero)
+        bill_length_mm = float(bill_length_mm)
+        bill_depth_mm = float(bill_depth_mm)
+        flipper_length_mm = float(flipper_length_mm)
+        body_mass_g = float(body_mass_g)
+        sex = int(sex)
+        island = int(island)
 
         # Crear un DataFrame con los datos de entrada
-        input_data = pd.DataFrame([[long1, long2, long3, genero]], 
-                                  columns=['l1', 'l2', 'l3', 'genero'])
+        input_data = pd.DataFrame([[bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex, island]], 
+                                  columns=['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g', 'sex', 'island'])
 
-        # # Escalar los datos de entrada
-        # scaler = StandardScaler()
-        # input_scaled = scaler.transform(input_data)
-
-        # Realizar la predicción
+        # Realizar la predicción sin escalar los datos
         prediction = model.predict(input_data)
         
         # Retornar la predicción en formato JSON
