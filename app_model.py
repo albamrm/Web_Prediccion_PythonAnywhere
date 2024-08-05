@@ -9,7 +9,7 @@ import subprocess
 
 # os.chdir(os.path.dirname(__file__))
 
-path_base = "/home/Juanxetee/sabadosteam/"
+path_base = "/home/Juanxetee/sabadosteam"
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -25,7 +25,7 @@ def hello():
 def predict():
     try:
         # Cargar el modelo
-        model_path = os.path.join(path_base,'ad_model.pkl','rb')
+        model_path = os.path.join(path_base,'/ad_model.pkl')
         with open(model_path, 'rb') as f:
             model = pickle.load(f)
         
@@ -65,8 +65,8 @@ def predict():
 @app.route('/api/v1/retrain', methods=['GET'])
 def retrain(): # Rutarlo al endpoint '/api/v1/retrain/', metodo GET
     
-    if os.path.exists(path_base + "data/penguins.csv"):
-        data = pd.read_csv(path_base + 'data/penguins.csv')
+    if os.path.exists(path_base + "/data/penguins.csv"):
+        data = pd.read_csv(path_base + '/data/penguins.csv')
         
         # Separar características y variable objetivo
         X = data.drop(columns='species')
@@ -78,12 +78,12 @@ def retrain(): # Rutarlo al endpoint '/api/v1/retrain/', metodo GET
         
         # Dividir en entrenamiento y prueba
         X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
-        model = pickle.load(open(path_base + 'ad_model.pkl'))
+        model = pickle.load(open(path_base + '/ad_model.pkl'))
         # Reentrenar el modelo
         model.fit(X_train, y_train)
         
         # Guardar el modelo reentrenado
-        pickle.dump(model, open(path_base + 'ad_model.pkl', 'wb'))
+        pickle.dump(model, open(path_base + '/ad_model.pkl'))
 
         return f"Model retrained."
     else:
