@@ -11,23 +11,23 @@ import subprocess
 
 path_base = "/home/findecurso/sabadosteam"
 
-app = Flask(__name__, template_folder='/templates', static_folder='/static')
+app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config['DEBUG'] = True
 
 # Enruta la landing page (endpoint /)
 @app.route('/', methods=['GET'])
 def home():
-    return render_template('/templates/index.html')
+    return render_template('index.html')
 
 # Enruta la función para mostrar la página de predicción
 @app.route('/predict', methods=['GET'])
 def show_predict():
-    return render_template('/templates/predict.html')
+    return render_template('predict.html')
 
 # Enruta la función para mostrar la página de reentrenamiento
 @app.route('/retrain', methods=['GET'])
 def show_retrain():
-    return render_template('/templates/retrain.html')
+    return render_template('retrain.html')
 
 # Enruta la función al endpoint /api/v1/predict
 @app.route('/api/v1/predict', methods=['GET'])
