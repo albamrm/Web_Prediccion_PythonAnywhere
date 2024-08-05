@@ -25,7 +25,7 @@ def hello():
 def predict():
     try:
         # Cargar el modelo
-        model_path = os.path.join(path_base, 'ad_model.pkl', 'rb')
+        model_path = os.path.join(path_base,'ad_model.pkl','rb')
         with open(model_path, 'rb') as f:
             model = pickle.load(f)
         
@@ -49,12 +49,12 @@ def predict():
         input_data = pd.DataFrame([[long1, long2, long3, genero]], 
                                   columns=['l1', 'l2', 'l3', 'genero'])
 
-        # Escalar los datos de entrada
-        scaler = StandardScaler()
-        input_scaled = scaler.transform(input_data)
+        # # Escalar los datos de entrada
+        # scaler = StandardScaler()
+        # input_scaled = scaler.transform(input_data)
 
         # Realizar la predicción
-        prediction = model.predict(input_scaled)
+        prediction = model.predict(input_data)
         
         # Retornar la predicción en formato JSON
         return jsonify({'predictions': prediction[0]})
@@ -64,7 +64,7 @@ def predict():
 # Endpoint para reentrenar el modelo
 @app.route('/api/v1/retrain', methods=['GET'])
 def retrain(): # Rutarlo al endpoint '/api/v1/retrain/', metodo GET
-    model = pickle.load(open(path_base + 'ad_model.pkl','rb'))
+    
     if os.path.exists(path_base + "data/penguins.csv"):
         data = pd.read_csv(path_base + 'data/penguins.csv')
         
@@ -78,7 +78,7 @@ def retrain(): # Rutarlo al endpoint '/api/v1/retrain/', metodo GET
         
         # Dividir en entrenamiento y prueba
         X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
-        
+        model = pickle.load(open(path_base + 'ad_model.pkl','rb'))
         # Reentrenar el modelo
         model.fit(X_train, y_train)
         
