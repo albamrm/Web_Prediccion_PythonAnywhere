@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, send_from_directory
 import os
 import pickle
 import pandas as pd
@@ -7,8 +7,6 @@ from sklearn.preprocessing import StandardScaler
 import subprocess
 
 path_base = "/home/findecurso/sabadosteam"
-
-# Configurar rutas absolutas para templates y static
 template_dir = os.path.join(path_base, '/templates')
 static_dir = os.path.join(path_base, '/static')
 
@@ -18,7 +16,7 @@ app.config['DEBUG'] = True
 # Enruta la landing page (endpoint /)
 @app.route('/', methods=['GET'])
 def hello():
-    return render_template('/home/findecurso/sabadosteam/templates/index.html')
+    return send_from_directory(template_dir, 'index.html')
 
 # Enruta la función al endpoint /api/v1/predict
 @app.route('/api/v1/predict', methods=['GET'])
@@ -63,7 +61,7 @@ def predict():
         except Exception as e:
             return jsonify({'error': str(e)}), 500
     else:
-        return render_template('predict.html')
+        return send_from_directory(template_dir, 'predict.html')
 
 # Endpoint para reentrenar el modelo
 @app.route('/api/v1/retrain', methods=['GET'])
@@ -96,7 +94,7 @@ def retrain():
         except Exception as e:
             return jsonify({'error': str(e)}), 500
     else:
-        return render_template('retrain.html')
+        return send_from_directory(template_dir, 'retrain.html')
 
 @app.route('/webhook_2024', methods=['POST'])
 def webhook():
