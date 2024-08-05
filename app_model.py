@@ -8,27 +8,27 @@ import subprocess
 
 path_base = "/home/findecurso/sabadosteam"
 
-app = Flask(__name__, template_folder='templates', static_folder='static')
+app = Flask(__name__, template_folder='/templates', static_folder='/static')
 app.config['DEBUG'] = True
 
 # Enruta la landing page (endpoint /)
 @app.route('/', methods=['GET'])
 def hello():
-    return render_template('index.html')
+    return render_template('/templates/index.html')
 
 # Enruta la función para mostrar la página de predicción y la API para predecir
 @app.route('/predict', methods=['GET'])
 def show_predict():
     if request.method == 'GET' and 'bill_length_mm' in request.args:
         return predict()
-    return render_template('predict.html')
+    return render_template('/templates/predict.html')
 
 # Enruta la función para mostrar la página de reentrenamiento y la API para reentrenar
 @app.route('/retrain', methods=['GET'])
 def show_retrain():
     if request.method == 'GET' and 'retrain' in request.args:
         return retrain()
-    return render_template('retrain.html')
+    return render_template('/templates/retrain.html')
 
 # Enruta la función al endpoint /api/v1/predict
 def predict():
