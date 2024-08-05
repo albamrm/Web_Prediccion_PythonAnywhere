@@ -23,6 +23,7 @@ def hello():
 
 @app.route('/api/v1/predict', methods=['GET'])
 def predict():
+    model = pickle.load(open(path_base + 'ad_model.pkl','rb'))
     try:
         # Obtener los parámetros de la solicitud GET
         long1 = request.args.get('l1', None)
@@ -45,6 +46,7 @@ def predict():
                                   columns=['l1', 'l2', 'l3', 'genero'])
 
         # Escalar los datos de entrada
+        scaler = StandardScaler()
         input_scaled = scaler.transform(input_data)
 
         # Realizar la predicción
@@ -58,6 +60,7 @@ def predict():
 # Endpoint para reentrenar el modelo
 @app.route('/api/v1/retrain', methods=['GET'])
 def retrain(): # Rutarlo al endpoint '/api/v1/retrain/', metodo GET
+    model = pickle.load(open(path_base + 'ad_model.pkl','rb'))
     if os.path.exists(path_base + "data/penguins.csv"):
         data = pd.read_csv(path_base + 'data/penguins.csv')
         
