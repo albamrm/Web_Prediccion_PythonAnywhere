@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrain Model</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Retrain Model</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('show_predict') }}">Predict</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form id="retrain-form">
+            <input type="submit" value="Retrain Model">
+        </form>
+
+        <div id="retrain-result"></div>
+    </main>
+
+    <script>
+        document.getElementById('retrain-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            fetch('/api/v1/retrain')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('retrain-result').innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('retrain-result').innerHTML = 
+                        'An error occurred: ' + error;
+                });
+        });
+    </script>
+</body>
+</html>
