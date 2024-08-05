@@ -3,8 +3,7 @@ import os
 import pickle
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import Lasso
-from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+from sklearn.preprocessing import StandardScaler
 import numpy as np
 import subprocess
 
@@ -52,6 +51,7 @@ def retrain(): # Rutarlo al endpoint '/api/v1/retrain/', metodo GET
         y = data['species']
         
         # Escalar los datos
+        scaler = StandardScaler()
         X_scaled = scaler.fit_transform(X)
         
         # Dividir en entrenamiento y prueba
