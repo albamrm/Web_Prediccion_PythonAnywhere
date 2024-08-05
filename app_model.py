@@ -25,7 +25,7 @@ def hello():
 def predict():
     try:
         # Cargar el modelo
-        model_path = os.path.join(path_base,'/ad_model.pkl')
+        model_path = os.path.join(path_base,'/ad_model.pkl','rb')
         with open(model_path, 'rb') as f:
             model = pickle.load(f)
         
@@ -78,12 +78,12 @@ def retrain(): # Rutarlo al endpoint '/api/v1/retrain/', metodo GET
         
         # Dividir en entrenamiento y prueba
         X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
-        model = pickle.load(open(path_base + '/ad_model.pkl'))
+        model = pickle.load(open(path_base + '/ad_model.pkl','rb'))
         # Reentrenar el modelo
         model.fit(X_train, y_train)
         
         # Guardar el modelo reentrenado
-        pickle.dump(model, open(path_base + '/ad_model.pkl'))
+        pickle.dump(model, open(path_base + '/ad_model.pkl','wb'))
 
         return f"Model retrained."
     else:
