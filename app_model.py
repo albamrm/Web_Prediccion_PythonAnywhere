@@ -18,7 +18,7 @@ app.config['DEBUG'] = True
 # Enruta la landing page (endpoint /)
 @app.route('/', methods=['GET'])
 def hello():
-    return render_template('index.html')
+    return render_template('/home/findecurso/sabadosteam/templates/index.html')
 
 # Enruta la función al endpoint /api/v1/predict
 @app.route('/api/v1/predict', methods=['GET'])
