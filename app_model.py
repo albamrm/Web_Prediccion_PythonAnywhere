@@ -11,7 +11,7 @@ import subprocess
 
 path_base = "/home/findecurso/sabadosteam"
 
-app = Flask(__name__, template_folder='templates', static_folder='static')
+app = Flask(__name__, template_folder='/home/findecurso/sabadosteam/templates', static_folder='/home/findecurso/sabadosteam/static')
 app.config['DEBUG'] = True
 
 # Enruta la landing page (endpoint /)
@@ -19,18 +19,10 @@ app.config['DEBUG'] = True
 def home():
     return render_template('index.html')
 
-# Enruta la función para mostrar la página de predicción
-@app.route('/predict', methods=['GET'])
-def show_predict():
-    return render_template('predict.html')
-
-# Enruta la función para mostrar la página de reentrenamiento
-@app.route('/retrain', methods=['GET'])
-def show_retrain():
-    return render_template('retrain.html')
-
 # Enruta la función al endpoint /api/v1/predict
 @app.route('/api/v1/predict', methods=['GET'])
+def show_predict():
+    return render_template('predict.html')
 def predict():
     try:
         # Cargar el modelo
@@ -73,6 +65,8 @@ def predict():
 
 # Endpoint para reentrenar el modelo
 @app.route('/api/v1/retrain', methods=['GET'])
+def show_retrain():
+    return render_template('retrain.html')
 def retrain():
     try:
         if os.path.exists(path_base + "/data/penguins.csv"):
