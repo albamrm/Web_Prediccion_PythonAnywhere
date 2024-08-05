@@ -23,8 +23,12 @@ def hello():
 
 @app.route('/api/v1/predict', methods=['GET'])
 def predict():
-    model = pickle.load(open(path_base + 'ad_model.pkl','rb'))
     try:
+        # Cargar el modelo
+        model_path = os.path.join(path_base, 'ad_model.pkl', 'rb')
+        with open(model_path, 'rb') as f:
+            model = pickle.load(f)
+        
         # Obtener los parámetros de la solicitud GET
         long1 = request.args.get('l1', None)
         long2 = request.args.get('l2', None)
