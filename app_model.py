@@ -8,7 +8,11 @@ import subprocess
 
 path_base = "/home/findecurso/sabadosteam"
 
-app = Flask(__name__, template_folder= 'templates', static_folder= 'static')
+# Configurar rutas absolutas para templates y static
+template_dir = os.path.join(path_base, 'templates')
+static_dir = os.path.join(path_base, 'static')
+
+app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 app.config['DEBUG'] = True
 
 # Enruta la landing page (endpoint /)
@@ -16,13 +20,13 @@ app.config['DEBUG'] = True
 def hello():
     return render_template('index.html')
 
-# Enruta la funcion al endpoint /api/v1/predict
+# Enruta la función al endpoint /api/v1/predict
 @app.route('/api/v1/predict', methods=['GET'])
 def predict():
     if request.args:
         try:
             # Cargar el modelo
-            model_path = os.path.join(path_base + '/ad_model.pkl')
+            model_path = os.path.join(path_base, 'ad_model.pkl')
             with open(model_path, 'rb') as f:
                 model = pickle.load(f)
             
