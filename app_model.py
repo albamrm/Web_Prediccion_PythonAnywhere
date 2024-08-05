@@ -8,7 +8,7 @@ import subprocess
 
 path_base = "/home/findecurso/sabadosteam"
 
-app = Flask(__name__, template_folder=path_base + '/templates', static_folder= path_base + '/static')
+app = Flask(__name__, template_folder= 'templates', static_folder= 'static')
 app.config['DEBUG'] = True
 
 # Enruta la landing page (endpoint /)
