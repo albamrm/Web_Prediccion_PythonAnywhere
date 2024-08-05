@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penguin Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Penguin Prediction</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('routes.home') }}">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form action="/api/v1/predict" method="get" id="prediction-form">
+            <label for="bill_length_mm">Bill Length (mm):</label>
+            <input type="number" step="0.1" id="bill_length_mm" name="bill_length_mm" required><br><br>
+
+            <label for="bill_depth_mm">Bill Depth (mm):</label>
+            <input type="number" step="0.1" id="bill_depth_mm" name="bill_depth_mm" required><br><br>
+
+            <label for="flipper_length_mm">Flipper Length (mm):</label>
+            <input type="number" step="0.1" id="flipper_length_mm" name="flipper_length_mm" required><br><br>
+
+            <label for="body_mass_g">Body Mass (g):</label>
+            <input type="number" step="0.1" id="body_mass_g" name="body_mass_g" required><br><br>
+
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex" required>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+            </select><br><br>
+
+            <label for="island">Island:</label>
+            <select id="island" name="island" required>
+                <option value="0">Biscoe</option>
+                <option value="1">Dream</option>
+                <option value="2">Torgersen</option>
+            </select><br><br>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        <div id="prediction-result"></div>
+    </main>
+
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const queryString = new URLSearchParams(formData).toString();
+            fetch('/api/v1/predict?' + queryString)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('prediction-result').innerHTML = 
+                        'Prediction: ' + data.predictions;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('prediction-result').innerHTML = 
+                        'An error occurred: ' + error;
+                });
+        });
+    </script>
+</body>
+</html>
