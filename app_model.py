@@ -9,8 +9,8 @@ import subprocess
 path_base = "/home/findecurso/sabadosteam"
 
 # Configurar rutas absolutas para templates y static
-template_dir = os.path.join(path_base, 'templates')
-static_dir = os.path.join(path_base, 'static')
+template_dir = os.path.join(path_base, '/templates')
+static_dir = os.path.join(path_base, '/static')
 
 app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 app.config['DEBUG'] = True
@@ -26,7 +26,7 @@ def predict():
     if request.args:
         try:
             # Cargar el modelo
-            model_path = os.path.join(path_base, 'ad_model.pkl')
+            model_path = os.path.join(path_base, '/ad_model.pkl')
             with open(model_path, 'rb') as f:
                 model = pickle.load(f)
             
