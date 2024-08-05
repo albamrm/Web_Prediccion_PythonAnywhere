@@ -1,32 +1,40 @@
-from flask import Flask, jsonify, request, render_template, url_for
+from flask import Flask, jsonify, request, render_template
 import os
 import pickle
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-import numpy as np
 import subprocess
-
-# os.chdir(os.path.dirname(__file__))
 
 path_base = "/home/findecurso/sabadosteam"
 
-app = Flask(__name__, template_folder='/home/findecurso/sabadosteam/templates', static_folder='/home/findecurso/sabadosteam/static')
+app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config['DEBUG'] = True
 
 # Enruta la landing page (endpoint /)
 @app.route('/', methods=['GET'])
-def home():
+def hello():
     return render_template('index.html')
 
-# Enruta la función al endpoint /api/v1/predict
-@app.route('/api/v1/predict', methods=['GET'])
+# Enruta la función para mostrar la página de predicción y la API para predecir
+@app.route('/predict', methods=['GET'])
 def show_predict():
+    if request.method == 'GET' and 'bill_length_mm' in request.args:
+        return predict()
     return render_template('predict.html')
+
+# Enruta la función para mostrar la página de reentrenamiento y la API para reentrenar
+@app.route('/retrain', methods=['GET'])
+def show_retrain():
+    if request.method == 'GET' and 'retrain' in request.args:
+        return retrain()
+    return render_template('retrain.html')
+
+# Enruta la función al endpoint /api/v1/predict
 def predict():
     try:
         # Cargar el modelo
-        model_path = os.path.join(path_base + '/ad_model.pkl')
+        model_path = os.path.join(path_base, 'ad_model.pkl')
         with open(model_path, 'rb') as f:
             model = pickle.load(f)
         
@@ -64,9 +72,6 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 # Endpoint para reentrenar el modelo
-@app.route('/api/v1/retrain', methods=['GET'])
-def show_retrain():
-    return render_template('retrain.html')
 def retrain():
     try:
         if os.path.exists(path_base + "/data/penguins.csv"):
