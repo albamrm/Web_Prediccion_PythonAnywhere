@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, send_from_directory, render_template
+from flask import Flask, jsonify, request, send_from_directory
 import os
 import pickle
 import pandas as pd
@@ -16,7 +16,7 @@ app.config['DEBUG'] = True
 # Enruta la landing page (endpoint /)
 @app.route('/', methods=['GET'])
 def hello():
-    return render_template(template_dir, 'index.html')
+    return send_from_directory(template_dir, 'index.html')
 
 # Enruta la función al endpoint /api/v1/predict
 @app.route('/api/v1/predict', methods=['GET'])
