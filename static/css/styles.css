@@ -1,89 +1,51 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
     background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    color: #343a40; /* Color del texto */
+    line-height: 1.6; /* Mejora la legibilidad del texto */
 }
 
-header {
-    background-color: #343a40;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
+.navbar {
+    margin-bottom: 20px; /* Espacio entre la barra de navegación y el contenido */
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2em;
+.container {
+    margin-top: 30px; /* Ajustado para un espaciado más uniforme */
 }
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
+.jumbotron {
+    background-color: #ffffff; /* Fondo blanco para el jumbotron */
+    border-radius: 0.3rem; /* Bordes redondeados */
+    padding: 2rem; /* Espaciado interno */
+    box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Sombra ligera para un efecto de elevación */
 }
 
-nav ul li {
-    display: inline;
-    margin: 0 15px;
+.footer {
+    background-color: #343a40; /* Fondo oscuro para el pie de página */
+    color: #ffffff; /* Color del texto del pie de página */
+    padding: 15px; /* Espaciado interno del pie de página */
+    margin-top: 20px; /* Espacio antes del pie de página */
 }
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
+img.img-fluid {
+    max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
 }
 
-main {
-    padding: 20px;
+h1, h2, h3 {
+    color: #007bff; /* Color azul para los encabezados */
 }
 
-h1 {
-    color: #343a40;
+.btn-primary {
+    background-color: #007bff; /* Color de fondo del botón */
+    border-color: #007bff; /* Color del borde del botón */
 }
 
-label {
-    font-weight: bold;
+.btn-primary:hover {
+    background-color: #0056b3; /* Color de fondo del botón en hover */
+    border-color: #004085; /* Color del borde del botón en hover */
 }
 
-input[type="number"], select {
-    margin-bottom: 10px;
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
+.btn-primary:focus, .btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); /* Sombra de enfoque para mejorar accesibilidad */
 }
-
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-#prediction-result {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #343a40;
-}
-
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 1.5em;
-    }
-
-    nav ul li {
-        display: block;
-        margin: 10px 0;
-    }
-
-    input[type="number"], select, input[type="submit"] {
-        width: 100%;
-        margin: 10px 0;
-    }
-}
-
