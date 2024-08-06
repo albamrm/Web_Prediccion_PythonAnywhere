@@ -66,7 +66,7 @@ def predict():
 # Endpoint para reentrenar el modelo
 @app.route('/api/v1/retrain', methods=['GET','POST'])
 def retrain():
-    if request.args:
+    if request.method == 'POST':
         try:
             if os.path.exists(path_base + "/data/penguins.csv"):
                 data = pd.read_csv(path_base + '/data/penguins.csv')
@@ -88,9 +88,9 @@ def retrain():
                 # Guardar el modelo reentrenado
                 pickle.dump(model, open(path_base + '/ad_model.pkl','wb'))
 
-                return f"Model retrained."
+                return jsonify({'message': 'Model retrained successfully!'})
             else:
-                return f"<h2>New data for retrain NOT FOUND. Nothing done!</h2>"
+                return jsonify({'error': 'New data for retrain NOT FOUND. Nothing done!'}), 404
         except Exception as e:
             return jsonify({'error': str(e)}), 500
     else:
