@@ -2,87 +2,55 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa;
+    background-color: #f0f0f0;
 }
 
 header {
-    background-color: #343a40;
-    color: white;
-    padding: 10px 0;
+    background-color: #4CAF50;
+    padding: 1em;
     text-align: center;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2em;
+    color: white;
 }
 
 nav ul {
     list-style-type: none;
     padding: 0;
+    text-align: center;
 }
 
 nav ul li {
     display: inline;
-    margin: 0 15px;
+    margin-right: 1em;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
 }
 
 main {
-    padding: 20px;
+    padding: 2em;
+    text-align: center;
 }
 
-h1 {
-    color: #343a40;
+form {
+    margin-top: 2em;
 }
 
-label {
-    font-weight: bold;
+label, select, input {
+    display: block;
+    margin: 0.5em auto;
+    padding: 0.5em;
 }
 
-input[type="number"], select {
-    margin-bottom: 10px;
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-}
-
-input[type="submit"] {
+button {
     background-color: #4CAF50;
     color: white;
-    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    padding: 1em 2em;
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
+button:hover {
     background-color: #45a049;
-}
-
-#prediction-result {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #343a40;
-}
-
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 1.5em;
-    }
-
-    nav ul li {
-        display: block;
-        margin: 10px 0;
-    }
-
-    input[type="number"], select, input[type="submit"] {
-        width: 100%;
-        margin: 10px 0;
-    }
 }
