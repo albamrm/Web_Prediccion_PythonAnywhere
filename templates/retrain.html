@@ -28,16 +28,21 @@
         document.getElementById('retrain-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
-            fetch('/api/v1/retrain')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('retrain-result').innerHTML = data;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    document.getElementById('retrain-result').innerHTML = 
-                        'An error occurred: ' + error;
-                });
+            fetch('/api/v1/retrain', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    document.getElementById('retrain-result').innerHTML = data.message;
+                } else if (data.error) {
+                    document.getElementById('retrain-result').innerHTML = 'An error occurred: ' + data.error;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('retrain-result').innerHTML = 'An error occurred: ' + error;
+            });
         });
     </script>
 </body>
