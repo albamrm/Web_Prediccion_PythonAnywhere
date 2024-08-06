@@ -64,7 +64,7 @@ def predict():
         return send_from_directory(template_dir, 'predict.html')
 
 # Endpoint para reentrenar el modelo
-@app.route('/api/v1/retrain', methods=['POST'])
+@app.route('/api/v1/retrain', methods=['GET','POST'])
 def retrain():
     if request.args:
         try:
