@@ -10,7 +10,7 @@ import subprocess
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
-path_base = '/home/AlbaMRM/PythonAnywhere_TC'
+path_base = '/home/findecurso/sabadosteam'
 
 @app.route('/')
 def index():
