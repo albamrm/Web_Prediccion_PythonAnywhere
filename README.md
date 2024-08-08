@@ -8,7 +8,6 @@ Este proyecto implementa una aplicación web usando Flask para predecir la espec
 
 - **Predicción de Especies:** Realiza predicciones sobre la especie de pingüino a partir de características físicas como isla, longitud del pico, profundidad del pico, longitud de la aleta, masa corporal y sexo.
 - **Reentrenamiento del Modelo:** Permite reentrenar el modelo, almacenando un modelo y escalador actualizados.
-- **Webhook para Actualizaciones:** Actualiza el repositorio del código fuente mediante un webhook.
 
 ## Web
 
